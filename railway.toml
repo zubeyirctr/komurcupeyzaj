@@ -2,4 +2,4 @@
 builder = "nixpacks"
 
 [deploy]
-startCommand = "dotnet KomürcüPeyzaj.dll"
+startCommand = "dotnet run --project KomürcüPeyzaj.csproj"
