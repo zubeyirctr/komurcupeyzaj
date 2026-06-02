@@ -1,0 +1,370 @@
+@using KomürcüPeyzaj.Models
+@{
+    ViewData["Title"] = "Anasayfa";
+    var hizmetler     = ViewBag.Hizmetler as List<Hizmet> ?? new();
+    var projeler      = ViewBag.OneProjeler as List<Proje> ?? new();
+    var bloglar       = ViewBag.SonBloglar as List<BlogYazisi> ?? new();
+    var referanslar   = ViewBag.Referanslar as List<Referans> ?? new();
+    var ayarlar       = ViewBag.Ayarlar as SiteAyarlari ?? new SiteAyarlari();
+    var onceSonra     = ViewBag.OnceSonraPrje as Proje;
+}
+
+<!-- ══ HERO ═══════════════════════════════════════════════════════════════ -->
+<section class="hero-section">
+    <div class="hero-bg" style="background-image:url('/images/hero-bg.jpg')"></div>
+    <div class="hero-overlay"></div>
+    <div class="container hero-content text-white">
+        <p class="hero-eyebrow reveal">Profesyonel Peyzaj Hizmetleri</p>
+        <h1 class="hero-title reveal">
+            Doğayı Hayatınıza<br><em>Taşıyoruz</em>
+        </h1>
+        <p class="hero-sub reveal">
+            Bahçenizi, terasınızı ve dış yaşam alanlarınızı<br>
+            premium bir deneyime dönüştürüyoruz.
+        </p>
+        <div class="d-flex gap-3 flex-wrap reveal">
+            <a asp-controller="Proje" asp-action="Index" class="btn btn-gold">Projelerimiz</a>
+            <a asp-controller="Iletisim" asp-action="Index" class="btn btn-outline-gold">Teklif Al</a>
+        </div>
+    </div>
+    <div class="hero-scroll-hint">
+        <span></span>
+    </div>
+</section>
+
+<!-- ══ HİZMETLER ══════════════════════════════════════════════════════════ -->
+<section class="section-pad bg-light-section">
+    <div class="container">
+        <div class="section-header text-center reveal">
+            <p class="section-eyebrow">Ne Yapıyoruz</p>
+            <h2 class="section-title">Hizmetlerimiz</h2>
+            <div class="gold-line"></div>
+        </div>
+        <div class="row g-4 mt-4">
+            @foreach (var h in hizmetler.Take(6))
+            {
+                <div class="col-lg-4 col-md-6 reveal">
+                    <a asp-controller="Hizmet" asp-action="Detay" asp-route-id="@h.Id" class="text-decoration-none">
+                        <div class="hizmet-kart">
+                            @if (!string.IsNullOrEmpty(h.GorselUrl))
+                            {
+                                <div class="hizmet-kart-img">
+                                    <img src="@h.GorselUrl" alt="@h.Ad" loading="lazy" />
+                                </div>
+                            }
+                            <div class="hizmet-kart-body">
+                                <div class="hizmet-ikon"><i class="bi @h.Ikon"></i></div>
+                                <h3 class="hizmet-kart-title">@h.Ad</h3>
+                                <p class="hizmet-kart-desc">@h.KisaAciklama</p>
+                                <span class="hizmet-link">Detaylı Bilgi <i class="bi bi-arrow-right ms-1"></i></span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+        <div class="text-center mt-5 reveal">
+            <a asp-controller="Hizmet" asp-action="Index" class="btn btn-gold">Tüm Hizmetleri Gör</a>
+        </div>
+    </div>
+</section>
+
+<!-- ══ BEFORE / AFTER ════════════════════════════════════════════════════ -->
+@if (onceSonra != null && !string.IsNullOrEmpty(onceSonra.OncesiGorsel))
+{
+    <section class="section-pad">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-5 reveal">
+                    <p class="section-eyebrow">Dönüşüm</p>
+                    <h2 class="section-title">Öncesi &amp; Sonrası</h2>
+                    <div class="gold-line"></div>
+                    <p class="mt-4 text-muted">
+                        @onceSonra.Aciklama
+                    </p>
+                    <a asp-controller="Proje" asp-action="Detay" asp-route-id="@onceSonra.Id" class="btn btn-gold mt-3">
+                        Projeyi İncele
+                    </a>
+                </div>
+                <div class="col-lg-7 reveal">
+                    <div class="before-after-wrap">
+                        <img src="@onceSonra.OncesiGorsel" alt="Öncesi" class="img-before" />
+                        <img src="@onceSonra.SonrasiGorsel" alt="Sonrası" class="img-after" />
+                        <div class="ba-handle">
+                            <i class="bi bi-arrows-expand-vertical"></i>
+                        </div>
+                        <span class="ba-label ba-label-before">Öncesi</span>
+                        <span class="ba-label ba-label-after">Sonrası</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+<!-- ══ İSTATİSTİKLER ═════════════════════════════════════════════════════ -->
+<section class="stats-section">
+    <div class="container">
+        <div class="row g-4 text-center">
+            <div class="col-md-3 col-6">
+                <div class="stat-item reveal">
+                    <span class="stat-num" data-target="@ayarlar.TamamlananProje" data-suffix="+">0</span>
+                    <p class="stat-label">Tamamlanan Proje</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stat-item reveal">
+                    <span class="stat-num" data-target="@ayarlar.MutluMusteri" data-suffix="+">0</span>
+                    <p class="stat-label">Mutlu Müşteri</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stat-item reveal">
+                    <span class="stat-num" data-target="@ayarlar.DeneyimYili" data-suffix="+">0</span>
+                    <p class="stat-label">Yıl Deneyim</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stat-item reveal">
+                    <span class="stat-num" data-target="12" data-suffix="">0</span>
+                    <p class="stat-label">İl'de Hizmet</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ ÖNE ÇIKAN PROJELER ════════════════════════════════════════════════ -->
+<section class="section-pad">
+    <div class="container">
+        <div class="section-header text-center reveal">
+            <p class="section-eyebrow">Portföyümüzden</p>
+            <h2 class="section-title">Öne Çıkan Projeler</h2>
+            <div class="gold-line"></div>
+        </div>
+
+        <div class="thumb-slider mt-5 reveal">
+            <div class="thumb-track-wrap">
+                <div class="thumb-track">
+                    @foreach (var p in projeler)
+                    {
+                        <div class="thumb-item">
+                            <a asp-controller="Proje" asp-action="Detay" asp-route-id="@p.Id" class="text-decoration-none">
+                                <div class="proje-kart">
+                                    <img src="@p.KapakGorsel" alt="@p.Ad" loading="lazy" />
+                                    <div class="proje-kart-overlay">
+                                        <span class="proje-kart-cat">@p.Kategori</span>
+                                        <h3 class="proje-kart-title">@p.Ad</h3>
+                                        <span class="proje-kart-loc"><i class="bi bi-geo-alt me-1"></i>@p.Konum</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+            <button class="thumb-prev" aria-label="Önceki"><i class="bi bi-chevron-left"></i></button>
+            <button class="thumb-next" aria-label="Sonraki"><i class="bi bi-chevron-right"></i></button>
+        </div>
+
+        <div class="text-center mt-5 reveal">
+            <a asp-controller="Proje" asp-action="Index" class="btn btn-outline-dark">Tüm Projeleri Gör</a>
+        </div>
+    </div>
+</section>
+
+<!-- ══ NEDEN KÖMÜRCÜ PEYZAJ ══════════════════════════════════════════════ -->
+<section class="section-pad bg-light-section">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-5 reveal">
+                <p class="section-eyebrow">Fark Yaratan Değerler</p>
+                <h2 class="section-title">Neden Kömürcü Peyzaj?</h2>
+                <div class="gold-line"></div>
+                <p class="mt-4 text-muted">
+                    1998'den bu yana binlerce bahçeye imza atıyoruz. Her projede özgünlük, sürdürülebilirlik ve zarafet ön planda.
+                </p>
+                <a asp-controller="Hakkimizda" asp-action="Index" class="btn btn-gold mt-3">Bizi Tanıyın</a>
+            </div>
+            <div class="col-lg-7">
+                <div class="row g-3">
+                    <div class="col-sm-6 reveal">
+                        <div class="neden-kart">
+                            <div class="neden-ikon"><i class="bi bi-award"></i></div>
+                            <h5>25+ Yıl Deneyim</h5>
+                            <p>Sektörde derin bilgi ve tecrübe ile her projeye güvenle başlıyoruz.</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 reveal">
+                        <div class="neden-kart">
+                            <div class="neden-ikon"><i class="bi bi-people"></i></div>
+                            <h5>Uzman Ekip</h5>
+                            <p>Peyzaj mimarı ve usta uygulamacılardan oluşan sertifikalı kadromuz.</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 reveal">
+                        <div class="neden-kart">
+                            <div class="neden-ikon"><i class="bi bi-leaf"></i></div>
+                            <h5>Sürdürülebilir</h5>
+                            <p>Organik yöntemler ve yerli bitki kullanımıyla çevreye duyarlı projeler.</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 reveal">
+                        <div class="neden-kart">
+                            <div class="neden-ikon"><i class="bi bi-headset"></i></div>
+                            <h5>Proje Sonrası Destek</h5>
+                            <p>Tamamlanan projelere bakım ve teknik destek hizmeti veriyoruz.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ SÜREÇ ══════════════════════════════════════════════════════════════ -->
+<section class="section-pad">
+    <div class="container">
+        <div class="section-header text-center reveal">
+            <p class="section-eyebrow">Nasıl Çalışıyoruz</p>
+            <h2 class="section-title">Proje Sürecimiz</h2>
+            <div class="gold-line"></div>
+        </div>
+        <div class="row g-4 mt-4">
+            <div class="col-md-3 col-sm-6 reveal">
+                <div class="surec-adim">
+                    <div class="surec-no">01</div>
+                    <h5>Keşif &amp; Analiz</h5>
+                    <p>Sahanızı ziyaret ederek ihtiyaçlarınızı ve alanın potansiyelini değerlendiriyoruz.</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 reveal">
+                <div class="surec-adim">
+                    <div class="surec-no">02</div>
+                    <h5>Tasarım</h5>
+                    <p>Hayallerinizi dinleyip özgün bir peyzaj planı ve 3D görselleştirme hazırlıyoruz.</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 reveal">
+                <div class="surec-adim">
+                    <div class="surec-no">03</div>
+                    <h5>Uygulama</h5>
+                    <p>Uzman ekibimiz onaylanan tasarımı özenle ve zamanında hayata geçiriyor.</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 reveal">
+                <div class="surec-adim">
+                    <div class="surec-no">04</div>
+                    <h5>Bakım &amp; Destek</h5>
+                    <p>Teslim sonrası periyodik bakım programlarıyla bahçenizin canlılığını koruyoruz.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ REFERANSLAR ════════════════════════════════════════════════════════ -->
+@if (referanslar.Any())
+{
+    <section class="section-pad bg-dark-section">
+        <div class="container">
+            <div class="section-header text-center reveal">
+                <p class="section-eyebrow" style="color:var(--gold)">Müşterilerimiz Ne Diyor</p>
+                <h2 class="section-title text-white">Referanslarımız</h2>
+                <div class="gold-line"></div>
+            </div>
+            <div class="referans-carousel mt-5 reveal">
+                <div class="referans-track">
+                    @foreach (var r in referanslar)
+                    {
+                        <div class="referans-kart">
+                            <div class="ref-yildizlar mb-3">
+                                @for (int i = 0; i < r.Puan; i++) { <i class="bi bi-star-fill"></i> }
+                            </div>
+                            <p class="ref-yorum">"@r.Yorum"</p>
+                            <div class="ref-kisi mt-4">
+                                @if (!string.IsNullOrEmpty(r.FotoUrl))
+                                {
+                                    <img src="@r.FotoUrl" alt="@r.AdSoyad" class="ref-foto" />
+                                }
+                                else
+                                {
+                                    <div class="ref-foto-placeholder"><i class="bi bi-person"></i></div>
+                                }
+                                <div>
+                                    <strong class="ref-isim">@r.AdSoyad</strong>
+                                    <span class="ref-sehir">@r.Sehir@(!string.IsNullOrEmpty(r.ProjeAdi) ? " — " + r.ProjeAdi : "")</span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="ref-controls">
+                    <button class="ref-prev" aria-label="Önceki"><i class="bi bi-chevron-left"></i></button>
+                    <div class="ref-dots">
+                        @for (int i = 0; i < referanslar.Count; i++)
+                        {
+                            <button class="ref-dot @(i == 0 ? "active" : "")" aria-label="@(i+1). referans"></button>
+                        }
+                    </div>
+                    <button class="ref-next" aria-label="Sonraki"><i class="bi bi-chevron-right"></i></button>
+                </div>
+            </div>
+            <div class="text-center mt-4 reveal">
+                <a asp-controller="Referans" asp-action="Index" class="btn btn-outline-gold">Tüm Referansları Gör</a>
+            </div>
+        </div>
+    </section>
+}
+
+<!-- ══ SON BLOG YAZILARI ══════════════════════════════════════════════════ -->
+@if (bloglar.Any())
+{
+    <section class="section-pad">
+        <div class="container">
+            <div class="section-header text-center reveal">
+                <p class="section-eyebrow">Bilgi Köşesi</p>
+                <h2 class="section-title">Son Blog Yazıları</h2>
+                <div class="gold-line"></div>
+            </div>
+            <div class="row g-4 mt-4">
+                @foreach (var b in bloglar.Take(3))
+                {
+                    <div class="col-lg-4 col-md-6 reveal">
+                        <a asp-controller="Blog" asp-action="Detay" asp-route-id="@b.Id" class="text-decoration-none">
+                            <article class="blog-kart">
+                                <div class="blog-kart-img">
+                                    <img src="@b.KapakGorsel" alt="@b.Baslik" loading="lazy" />
+                                </div>
+                                <div class="blog-kart-body">
+                                    <time class="blog-tarih">@b.YayinTarihi.ToString("dd MMMM yyyy", new System.Globalization.CultureInfo("tr-TR"))</time>
+                                    <h3 class="blog-baslik">@b.Baslik</h3>
+                                    <p class="blog-ozet">@b.KisaAciklama</p>
+                                    <span class="blog-link">Devamını Oku <i class="bi bi-arrow-right"></i></span>
+                                </div>
+                            </article>
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="text-center mt-5 reveal">
+                <a asp-controller="Blog" asp-action="Index" class="btn btn-outline-dark">Tüm Yazıları Gör</a>
+            </div>
+        </div>
+    </section>
+}
+
+<!-- ══ CTA BANNER ════════════════════════════════════════════════════════ -->
+<section class="cta-banner">
+    <div class="cta-overlay"></div>
+    <div class="container text-center text-white cta-content">
+        <p class="section-eyebrow" style="color:var(--gold)">Hayalinizi Gerçeğe Dönüştürün</p>
+        <h2 class="section-title text-white">Projenizi Birlikte Planlayalım</h2>
+        <p class="mt-3 mb-4 opacity-75">
+            Ücretsiz keşif randevusu için hemen bize ulaşın.
+        </p>
+        <a asp-controller="Iletisim" asp-action="Index" class="btn btn-gold btn-lg">
+            İletişime Geç
+        </a>
+    </div>
+</section>

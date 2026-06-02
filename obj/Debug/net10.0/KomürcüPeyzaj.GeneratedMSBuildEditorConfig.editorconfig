@@ -1,0 +1,215 @@
+is_global = true
+build_property.TargetFramework = net10.0
+build_property.TargetFramework = net10.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.TargetFrameworkIdentifier = .NETCoreApp
+build_property.TargetFrameworkVersion = v10.0
+build_property.RootNamespace = KomürcüPeyzaj
+build_property.RootNamespace = KomürcüPeyzaj
+build_property.ProjectDir = /Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 9.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 10.0
+build_property.EnableCodeStyleSeverity = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Admin/Ayarlar/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = SW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Admin/Blog/Duzenle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = RHV6ZW5sZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Admin/Blog/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = SW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Admin/Blog/Olustur.cshtml]
+build_metadata.AdditionalFiles.TargetPath = T2x1c3R1ci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Admin/Blog/Sil.cshtml]
+build_metadata.AdditionalFiles.TargetPath = U2lsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Admin/Ekip/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = SW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Admin/Hizmet/Duzenle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = RHV6ZW5sZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Admin/Hizmet/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = SW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Admin/Hizmet/Olustur.cshtml]
+build_metadata.AdditionalFiles.TargetPath = T2x1c3R1ci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Admin/Hizmet/Sil.cshtml]
+build_metadata.AdditionalFiles.TargetPath = U2lsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Admin/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = SW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Admin/Mesaj/Detay.cshtml]
+build_metadata.AdditionalFiles.TargetPath = RGV0YXkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Admin/Mesaj/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = SW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Admin/Proje/Duzenle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = RHV6ZW5sZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Admin/Proje/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = SW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Admin/Proje/Olustur.cshtml]
+build_metadata.AdditionalFiles.TargetPath = T2x1c3R1ci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Admin/Proje/Sil.cshtml]
+build_metadata.AdditionalFiles.TargetPath = U2lsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Admin/Referans/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = SW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Admin/SSS/Duzenle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = RHV6ZW5sZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Admin/SSS/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = SW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Admin/SSS/Olustur.cshtml]
+build_metadata.AdditionalFiles.TargetPath = T2x1c3R1ci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Admin/Urun/Duzenle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = RHV6ZW5sZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Admin/Urun/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = SW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Admin/Urun/Olustur.cshtml]
+build_metadata.AdditionalFiles.TargetPath = T2x1c3R1ci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Admin/Urun/Sil.cshtml]
+build_metadata.AdditionalFiles.TargetPath = U2lsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Blog/Detay.cshtml]
+build_metadata.AdditionalFiles.TargetPath = RGV0YXkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Blog/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = SW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Hakkimizda/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = SW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Hizmet/Detay.cshtml]
+build_metadata.AdditionalFiles.TargetPath = RGV0YXkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Hizmet/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = SW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = SW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJpdmFjeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Iletisim/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = SW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Iletisim/Tesekkurler.cshtml]
+build_metadata.AdditionalFiles.TargetPath = VGVzZWtrdXJsZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Proje/Detay.cshtml]
+build_metadata.AdditionalFiles.TargetPath = RGV0YXkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Proje/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = SW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Referans/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = SW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = RXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Shared/_AdminLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = X0FkbWluTGF5b3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Shared/_PageBanner.cshtml]
+build_metadata.AdditionalFiles.TargetPath = X1BhZ2VCYW5uZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = X1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Urun/Detay.cshtml]
+build_metadata.AdditionalFiles.TargetPath = RGV0YXkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Urun/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = SW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = X1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = X1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/zubeyircatar/Desktop/Kömürcü Peyzaj Web/KomürcüPeyzaj/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = X0xheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = b-w57bj6qm14

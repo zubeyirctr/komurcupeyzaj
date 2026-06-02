@@ -1,0 +1,82 @@
+@using KomürcüPeyzaj.Models
+@model List<BlogYazisi>
+@{
+    ViewData["Title"] = "Blog";
+    ViewData["BannerBaslik"] = "Blog";
+    ViewData["BannerAlt"] = "Peyzaj ve bahçecilik dünyasından içerikler";
+    int mevcutSayfa = ViewBag.MevcutSayfa ?? 1;
+    int toplamSayfa = ViewBag.ToplamSayfa ?? 1;
+}
+
+<partial name="_PageBanner" />
+
+<section class="section-pad">
+    <div class="container">
+        <div class="row g-4">
+            @foreach (var b in Model)
+            {
+                <div class="col-lg-4 col-md-6 reveal">
+                    <a asp-controller="Blog" asp-action="Detay" asp-route-id="@b.Id" class="text-decoration-none">
+                        <article class="blog-kart">
+                            <div class="blog-kart-img" style="height:220px; overflow:hidden;">
+                                <img src="@(string.IsNullOrEmpty(b.KapakGorsel) ? "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800" : b.KapakGorsel)"
+                                     alt="@b.Baslik" loading="lazy"
+                                     style="width:100%; height:100%; object-fit:cover;" />
+                            </div>
+                            <div class="blog-kart-body">
+                                <div class="d-flex flex-wrap gap-1 mb-2">
+                                    @if (!string.IsNullOrEmpty(b.Etiketler))
+                                    {
+                                        foreach (var tag in b.Etiketler.Split(',').Take(2))
+                                        {
+                                            <span class="blog-tag">#@tag.Trim()</span>
+                                        }
+                                    }
+                                </div>
+                                <time class="blog-tarih">@b.YayinTarihi.ToString("dd MMMM yyyy", new System.Globalization.CultureInfo("tr-TR"))</time>
+                                <h3 class="blog-baslik">@b.Baslik</h3>
+                                <p class="blog-ozet">@b.KisaAciklama</p>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <span class="blog-link">Devamını Oku <i class="bi bi-arrow-right"></i></span>
+                                    <small class="text-muted"><i class="bi bi-eye me-1"></i>@b.OkunmaSayisi</small>
+                                </div>
+                            </div>
+                        </article>
+                    </a>
+                </div>
+            }
+        </div>
+
+        @if (!Model.Any())
+        {
+            <div class="text-center py-5 text-muted">
+                <i class="bi bi-journal-x fs-1 opacity-25 d-block mb-3"></i>
+                <p>Henüz blog yazısı bulunmuyor.</p>
+            </div>
+        }
+
+        @if (toplamSayfa > 1)
+        {
+            <nav class="mt-5 d-flex justify-content-center reveal">
+                <ul class="pagination">
+                    <li class="page-item @(mevcutSayfa == 1 ? "disabled" : "")">
+                        <a class="page-link" asp-action="Index" asp-route-sayfa="@(mevcutSayfa - 1)">
+                            <i class="bi bi-chevron-left"></i>
+                        </a>
+                    </li>
+                    @for (int i = 1; i <= toplamSayfa; i++)
+                    {
+                        <li class="page-item @(i == mevcutSayfa ? "active" : "")">
+                            <a class="page-link" asp-action="Index" asp-route-sayfa="@i">@i</a>
+                        </li>
+                    }
+                    <li class="page-item @(mevcutSayfa == toplamSayfa ? "disabled" : "")">
+                        <a class="page-link" asp-action="Index" asp-route-sayfa="@(mevcutSayfa + 1)">
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        }
+    </div>
+</section>

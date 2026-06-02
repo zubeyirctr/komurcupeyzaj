@@ -1,0 +1,21 @@
+@{
+    var baslik = ViewData["BannerBaslik"] as string ?? ViewData["Title"] as string ?? "";
+    var altBaslik = ViewData["BannerAlt"] as string ?? "";
+    var gorsel = ViewData["BannerGorsel"] as string ?? "/images/banner-default.jpg";
+}
+<section class="page-banner" style="background-image:url('@gorsel')">
+    <div class="page-banner-overlay"></div>
+    <div class="container text-center">
+        <h1 class="page-banner-title">@baslik</h1>
+        @if (!string.IsNullOrEmpty(altBaslik))
+        {
+            <p class="page-banner-sub">@altBaslik</p>
+        }
+        <nav aria-label="breadcrumb" class="d-flex justify-content-center mt-3">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Anasayfa</a></li>
+                <li class="breadcrumb-item active" aria-current="page">@baslik</li>
+            </ol>
+        </nav>
+    </div>
+</section>

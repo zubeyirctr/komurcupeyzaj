@@ -1,0 +1,28 @@
+@{
+    ViewData["Title"] = "Teşekkürler";
+}
+
+<section style="padding:10rem 0; min-height:75vh">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center">
+                <div class="tesekkur-ikon mb-5">
+                    <i class="bi bi-check-lg"></i>
+                </div>
+                <h1 class="section-title mb-3">Mesajınız Alındı</h1>
+                <div class="gold-line mx-auto mb-4"></div>
+                <p class="lead text-muted mb-5">
+                    Teşekkür ederiz. En kısa sürede ekibimiz sizinle iletişime geçecektir.
+                </p>
+                <div class="d-flex gap-3 justify-content-center flex-wrap">
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-gold btn-lg">
+                        Anasayfaya Dön
+                    </a>
+                    <a asp-controller="Proje" asp-action="Index" class="btn btn-outline-dark btn-lg">
+                        Projelerimizi Gör
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

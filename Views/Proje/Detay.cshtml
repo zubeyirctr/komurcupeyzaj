@@ -1,0 +1,116 @@
+@using KomürcüPeyzaj.Models
+@model Proje
+@{
+    ViewData["Title"] = Model.Ad;
+    ViewData["BannerBaslik"] = Model.Ad;
+    ViewData["BannerAlt"] = Model.Kategori;
+    ViewData["BannerGorsel"] = Model.KapakGorsel;
+}
+
+<partial name="_PageBanner" />
+
+<section class="section-pad">
+    <div class="container">
+        <div class="row g-5">
+            <!-- Sol: Galeri + İçerik -->
+            <div class="col-lg-8">
+
+                <!-- Before/After (eğer varsa) -->
+                @if (!string.IsNullOrEmpty(Model.OncesiGorsel) && !string.IsNullOrEmpty(Model.SonrasiGorsel))
+                {
+                    <div class="mb-5 reveal">
+                        <h4 class="mb-3" style="font-family:var(--font-serif)">Öncesi &amp; Sonrası</h4>
+                        <div class="before-after-wrap">
+                            <img src="@Model.OncesiGorsel" alt="Öncesi" class="img-before" />
+                            <img src="@Model.SonrasiGorsel" alt="Sonrası" class="img-after" />
+                            <div class="ba-handle"><i class="bi bi-arrows-expand-vertical"></i></div>
+                            <span class="ba-label ba-label-before">Öncesi</span>
+                            <span class="ba-label ba-label-after">Sonrası</span>
+                        </div>
+                    </div>
+                }
+
+                <!-- Ana Görsel -->
+                <div class="reveal">
+                    <img src="@Model.KapakGorsel" alt="@Model.Ad"
+                         class="img-fluid w-100 mb-3"
+                         style="max-height:520px; object-fit:cover"
+                         data-lightbox="@Model.KapakGorsel" />
+                </div>
+
+                <!-- Thumbnail Galeri -->
+                @if (Model.Gorseller != null && Model.Gorseller.Any())
+                {
+                    <div class="d-flex flex-wrap gap-2 mb-5 reveal">
+                        @foreach (var g in Model.Gorseller)
+                        {
+                            <img src="@g.GorselUrl" alt="@g.Baslik"
+                                 class="gallery-thumb-img"
+                                 data-lightbox="@g.GorselUrl"
+                                 loading="lazy" />
+                        }
+                    </div>
+                }
+
+                <!-- Açıklama -->
+                <div class="reveal">
+                    <h2 class="section-title" style="font-size:1.8rem">@Model.Ad</h2>
+                    <div class="gold-line mb-4"></div>
+                    <p style="line-height:1.9; color:var(--dark-muted)">@Model.Aciklama</p>
+                </div>
+            </div>
+
+            <!-- Sağ: Bilgi Kartı -->
+            <div class="col-lg-4">
+                <div class="sticky-top" style="top:100px">
+                    <div class="proje-bilgi-kart reveal">
+                        <h5>Proje Bilgileri</h5>
+                        <div class="gold-line my-3"></div>
+                        <ul class="proje-bilgi-list">
+                            <li>
+                                <i class="bi bi-geo-alt"></i>
+                                <div>
+                                    <small>Konum</small>
+                                    <span>@Model.Konum</span>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="bi bi-calendar3"></i>
+                                <div>
+                                    <small>Tamamlanma</small>
+                                    <span>@Model.TamamlanmaTarihi.ToString("MMMM yyyy", new System.Globalization.CultureInfo("tr-TR"))</span>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="bi bi-tag"></i>
+                                <div>
+                                    <small>Kategori</small>
+                                    <span>@Model.Kategori</span>
+                                </div>
+                            </li>
+                            @if (Model.Hizmet != null)
+                            {
+                                <li>
+                                    <i class="bi bi-tree"></i>
+                                    <div>
+                                        <small>Hizmet</small>
+                                        <a asp-controller="Hizmet" asp-action="Detay" asp-route-id="@Model.Hizmet.Id">@Model.Hizmet.Ad</a>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                        <a asp-controller="Iletisim" asp-action="Index" class="btn btn-gold w-100 mt-4">
+                            Benzer Proje Teklifi Al
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5 pt-3 reveal">
+            <a asp-controller="Proje" asp-action="Index" class="btn btn-outline-dark">
+                <i class="bi bi-arrow-left me-2"></i>Tüm Projelere Dön
+            </a>
+        </div>
+    </div>
+</section>

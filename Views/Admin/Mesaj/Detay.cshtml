@@ -1,0 +1,53 @@
+@using KomürcüPeyzaj.Models
+@model IletisimMesaji
+@{
+    ViewData["Title"] = "Mesaj Detayı";
+    Layout = "_AdminLayout";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h5 class="fw-bold mb-0">Mesaj Detayı</h5>
+    <a href="/admin/mesajlar" class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-left me-1"></i>Geri</a>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-8">
+        <div class="card shadow-sm p-4">
+            <h5 class="fw-bold mb-4">@(string.IsNullOrEmpty(Model.Konu) ? "Genel Mesaj" : Model.Konu)</h5>
+            <p style="line-height:1.9">@Model.Mesaj</p>
+            <hr>
+            <div class="d-flex gap-3 justify-content-between flex-wrap">
+                <a href="mailto:@Model.Email" class="btn btn-outline-primary">
+                    <i class="bi bi-reply me-1"></i>Yanıtla
+                </a>
+                <form asp-action="Sil" asp-route-id="@Model.Id" method="post"
+                      onsubmit="return confirm('Bu mesajı silmek istediğinize emin misiniz?')">
+                    <button type="submit" class="btn btn-outline-danger"><i class="bi bi-trash me-1"></i>Sil</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm p-4">
+            <h6 class="fw-bold mb-3">Gönderen Bilgileri</h6>
+            <ul class="list-unstyled">
+                <li class="mb-3 pb-3 border-bottom">
+                    <small class="text-muted d-block">Ad Soyad</small>
+                    <span class="fw-semibold">@Model.AdSoyad</span>
+                </li>
+                <li class="mb-3 pb-3 border-bottom">
+                    <small class="text-muted d-block">E-posta</small>
+                    <a href="mailto:@Model.Email" class="fw-semibold text-decoration-none" style="color:var(--primary)">@Model.Email</a>
+                </li>
+                <li class="mb-3 pb-3 border-bottom">
+                    <small class="text-muted d-block">Telefon</small>
+                    <span class="fw-semibold">@(string.IsNullOrEmpty(Model.Telefon) ? "—" : Model.Telefon)</span>
+                </li>
+                <li class="mb-3">
+                    <small class="text-muted d-block">Gönderim Tarihi</small>
+                    <span class="fw-semibold">@Model.GonderimTarihi.ToString("dd MMMM yyyy HH:mm")</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

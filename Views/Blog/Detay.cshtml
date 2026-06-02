@@ -1,0 +1,89 @@
+@using KomürcüPeyzaj.Models
+@model BlogYazisi
+@{
+    ViewData["Title"] = Model.Baslik;
+    ViewData["BannerBaslik"] = Model.Baslik;
+    ViewData["BannerGorsel"] = Model.KapakGorsel;
+    var benzerYazilar = ViewBag.BenzerYazilar as List<BlogYazisi> ?? new();
+}
+
+<partial name="_PageBanner" />
+
+<section class="section-pad">
+    <div class="container">
+        <div class="row g-5">
+            <!-- İçerik -->
+            <div class="col-lg-8 reveal">
+                <!-- Meta -->
+                <div class="blog-detay-meta d-flex flex-wrap gap-3 mb-4">
+                    <span><i class="bi bi-calendar3 me-1"></i>@Model.YayinTarihi.ToString("dd MMMM yyyy", new System.Globalization.CultureInfo("tr-TR"))</span>
+                    <span><i class="bi bi-person me-1"></i>@Model.Yazar</span>
+                    <span><i class="bi bi-eye me-1"></i>@Model.OkunmaSayisi okuma</span>
+                    <span><i class="bi bi-clock me-1"></i><span id="okumaSuresi">—</span> dk okuma</span>
+                </div>
+
+                @if (!string.IsNullOrEmpty(Model.Etiketler))
+                {
+                    <div class="d-flex flex-wrap gap-2 mb-4">
+                        @foreach (var tag in Model.Etiketler.Split(','))
+                        {
+                            <span class="blog-tag">#@tag.Trim()</span>
+                        }
+                    </div>
+                }
+
+                <!-- İçerik Metni -->
+                <div id="blogIcerik" class="blog-icerik" style="line-height:1.9">
+                    @Html.Raw(Model.Icerik)
+                </div>
+
+                <!-- Paylaş -->
+                <div class="blog-paylasim mt-5 pt-4 border-top d-flex align-items-center gap-3">
+                    <span class="text-muted">Paylaş:</span>
+                    <a href="#" class="sosyal-ikon" style="background:#1877F2;" target="_blank"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="sosyal-ikon" style="background:#000;" target="_blank"><i class="bi bi-twitter-x"></i></a>
+                    <a href="#" class="sosyal-ikon" style="background:#25D366;" target="_blank"><i class="bi bi-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <div class="sticky-top" style="top:100px">
+                    @if (benzerYazilar.Any())
+                    {
+                        <div class="mb-5 reveal">
+                            <h5 style="font-family:var(--font-serif); font-size:1.3rem">Benzer Yazılar</h5>
+                            <div class="gold-line mb-4"></div>
+                            @foreach (var b in benzerYazilar)
+                            {
+                                <a asp-controller="Blog" asp-action="Detay" asp-route-id="@b.Id" class="text-decoration-none">
+                                    <div class="benzer-yazi-kart mb-3">
+                                        <img src="@b.KapakGorsel" alt="@b.Baslik" loading="lazy" />
+                                        <div>
+                                            <p class="benzer-baslik">@b.Baslik</p>
+                                            <time>@b.YayinTarihi.ToString("dd MMM yyyy", new System.Globalization.CultureInfo("tr-TR"))</time>
+                                        </div>
+                                    </div>
+                                </a>
+                            }
+                        </div>
+                    }
+
+                    <div class="hizmet-sidebar-kart reveal">
+                        <h5>Ücretsiz Teklif Alın</h5>
+                        <p class="text-muted small mt-2 mb-4">
+                            Peyzaj projeniz için uzman ekibimiz yardımcı olmaya hazır.
+                        </p>
+                        <a asp-controller="Iletisim" asp-action="Index" class="btn btn-gold w-100">İletişime Geç</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-5 pt-3 reveal">
+            <a asp-controller="Blog" asp-action="Index" class="btn btn-outline-dark">
+                <i class="bi bi-arrow-left me-2"></i>Tüm Yazılara Dön
+            </a>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,140 @@
+@using KomürcüPeyzaj.Models
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "_AdminLayout";
+    var sonMesajlar = ViewBag.SonMesajlar as List<IletisimMesaji> ?? new();
+}
+
+<div class="row g-4 mb-5">
+    <div class="col-xl-3 col-md-6">
+        <div class="admin-stat-kart">
+            <div class="admin-stat-ikon" style="background:#1e4d2b20; color:#1e4d2b">
+                <i class="bi bi-tree"></i>
+            </div>
+            <div>
+                <p>Hizmetler</p>
+                <h3>@ViewBag.HizmetSayisi</h3>
+            </div>
+            <a asp-action="Hizmetler">Yönet →</a>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="admin-stat-kart">
+            <div class="admin-stat-ikon" style="background:#2196f320; color:#1565c0">
+                <i class="bi bi-box-seam"></i>
+            </div>
+            <div>
+                <p>Ürünler</p>
+                <h3>@ViewBag.UrunSayisi</h3>
+            </div>
+            <a asp-action="Urunler">Yönet →</a>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="admin-stat-kart">
+            <div class="admin-stat-ikon" style="background:#c9a84c20; color:#c9a84c">
+                <i class="bi bi-images"></i>
+            </div>
+            <div>
+                <p>Projeler</p>
+                <h3>@ViewBag.ProjeSayisi</h3>
+            </div>
+            <a asp-action="Projeler">Yönet →</a>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="admin-stat-kart">
+            <div class="admin-stat-ikon" style="background:#6a1b9a20; color:#6a1b9a">
+                <i class="bi bi-journal-text"></i>
+            </div>
+            <div>
+                <p>Blog Yazıları</p>
+                <h3>@ViewBag.BlogSayisi</h3>
+            </div>
+            <a asp-action="Blog">Yönet →</a>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="admin-stat-kart">
+            <div class="admin-stat-ikon" style="background:#e6510020; color:#e65100">
+                <i class="bi bi-envelope"></i>
+            </div>
+            <div>
+                <p>Okunmamış Mesaj</p>
+                <h3>@ViewBag.OkunmamisMesajSayisi</h3>
+            </div>
+            <a asp-action="Mesajlar">Görüntüle →</a>
+        </div>
+    </div>
+</div>
+
+@if (ViewBag.ReferansSayisi > 0)
+{
+    <div class="alert alert-warning d-flex align-items-center gap-3 mb-4">
+        <i class="bi bi-exclamation-circle fs-5"></i>
+        <span>
+            <strong>@ViewBag.ReferansSayisi</strong> adet onay bekleyen referans var.
+            <a asp-action="Referanslar" class="alert-link ms-2">Referansları İncele →</a>
+        </span>
+    </div>
+}
+
+<!-- Son Mesajlar -->
+<div class="card shadow-sm mb-4">
+    <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+        <h6 class="mb-0 fw-semibold">Son Mesajlar</h6>
+        <a asp-action="Mesajlar" class="btn btn-sm btn-outline-secondary">Tümünü Gör</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Ad Soyad</th>
+                    <th>E-posta</th>
+                    <th>Konu</th>
+                    <th>Tarih</th>
+                    <th>Durum</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var m in sonMesajlar)
+                {
+                    <tr class="@(!m.OkunduMu ? "fw-semibold" : "")">
+                        <td>@m.AdSoyad</td>
+                        <td class="text-muted small">@m.Email</td>
+                        <td>@(string.IsNullOrEmpty(m.Konu) ? "—" : m.Konu)</td>
+                        <td class="text-muted small">@m.GonderimTarihi.ToString("dd MMM yyyy")</td>
+                        <td>
+                            @if (!m.OkunduMu)
+                            { <span class="badge bg-warning text-dark">Yeni</span> }
+                            else
+                            { <span class="badge bg-secondary">Okundu</span> }
+                        </td>
+                        <td>
+                            <a asp-action="MesajDetay" asp-route-id="@m.Id" class="btn btn-sm btn-outline-primary">Görüntüle</a>
+                        </td>
+                    </tr>
+                }
+                @if (!sonMesajlar.Any())
+                {
+                    <tr><td colspan="6" class="text-center text-muted py-3">Mesaj yok.</td></tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Hızlı Erişim -->
+<div class="card shadow-sm">
+    <div class="card-body p-4">
+        <h6 class="fw-semibold mb-3">Hızlı Erişim</h6>
+        <div class="d-flex flex-wrap gap-2">
+            <a asp-action="HizmetOlustur" class="btn btn-outline-success btn-sm"><i class="bi bi-plus me-1"></i>Yeni Hizmet</a>
+            <a asp-action="ProjeOlustur" class="btn btn-outline-primary btn-sm"><i class="bi bi-plus me-1"></i>Yeni Proje</a>
+            <a asp-action="BlogOlustur" class="btn btn-sm" style="border:1px solid #6a1b9a; color:#6a1b9a"><i class="bi bi-plus me-1"></i>Yeni Blog</a>
+            <a asp-action="SssOlustur" class="btn btn-outline-secondary btn-sm"><i class="bi bi-plus me-1"></i>Yeni SSS</a>
+            <a asp-controller="Home" asp-action="Index" target="_blank" class="btn btn-outline-dark btn-sm"><i class="bi bi-eye me-1"></i>Siteyi Gör</a>
+        </div>
+    </div>
+</div>

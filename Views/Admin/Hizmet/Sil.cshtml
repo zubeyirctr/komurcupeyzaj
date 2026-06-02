@@ -1,0 +1,25 @@
+@using KomürcüPeyzaj.Models
+@model Hizmet
+@{
+    ViewData["Title"] = "Hizmet Sil";
+    Layout = "_AdminLayout";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm border-danger">
+            <div class="card-body p-4 text-center">
+                <i class="bi bi-exclamation-triangle-fill text-danger" style="font-size:3rem"></i>
+                <h4 class="fw-bold mt-3 mb-2">Hizmeti Silmek İstediğinize Emin Misiniz?</h4>
+                <p class="text-muted">Bu işlem geri alınamaz. <strong>@Model.Ad</strong> kalıcı olarak silinecektir.</p>
+                <div class="d-flex gap-3 justify-content-center mt-4">
+                    <form asp-action="SilOnayla" method="post">
+                        <input name="id" type="hidden" value="@Model.Id" />
+                        <button type="submit" class="btn btn-danger px-5">Evet, Sil</button>
+                    </form>
+                    <a href="/admin/hizmetler" class="btn btn-outline-secondary px-5">İptal</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

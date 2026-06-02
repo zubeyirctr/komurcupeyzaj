@@ -1,0 +1,40 @@
+@using KomürcüPeyzaj.Models
+@model Urun
+@{
+    ViewData["Title"] = "Ürünü Sil";
+    Layout = "_AdminLayout";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h5 class="fw-bold mb-0">Ürünü Sil</h5>
+    <a href="/admin/urunler" class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-left me-1"></i>Geri</a>
+</div>
+
+<div class="card shadow-sm border-danger">
+    <div class="card-body p-4">
+        <div class="alert alert-danger d-flex gap-3 align-items-start">
+            <i class="bi bi-exclamation-triangle-fill fs-4 mt-1"></i>
+            <div>
+                <strong>Bu işlem geri alınamaz.</strong><br />
+                <strong>@Model.Ad</strong> adlı ürünü silmek istediğinizden emin misiniz?
+            </div>
+        </div>
+
+        <div class="d-flex gap-3 align-items-center mb-4">
+            @if (!string.IsNullOrEmpty(Model.GorselUrl))
+            {
+                <img src="@Model.GorselUrl" alt="@Model.Ad" style="width:72px;height:72px;object-fit:cover;border-radius:8px" />
+            }
+            <div>
+                <h6 class="mb-0">@Model.Ad</h6>
+                <small class="text-muted">@Model.Kategori</small>
+            </div>
+        </div>
+
+        <form method="post" action="/admin/urunler/@Model.Id/sil">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-danger px-5">Evet, Sil</button>
+            <a href="/admin/urunler" class="btn btn-outline-secondary ms-2">Vazgeç</a>
+        </form>
+    </div>
+</div>

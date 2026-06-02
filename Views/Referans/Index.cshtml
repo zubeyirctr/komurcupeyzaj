@@ -1,0 +1,176 @@
+@using KomürcüPeyzaj.Models
+@model Referans
+@{
+    ViewData["Title"] = "Referanslar";
+    ViewData["BannerBaslik"] = "Referanslarımız";
+    ViewData["BannerAlt"] = "Müşterilerimizin deneyimleri";
+    var referanslar = ViewBag.Referanslar as List<Referans> ?? new();
+    var kurumsallar = ViewBag.KurumsalReferanslar as List<Referans> ?? new();
+}
+
+<partial name="_PageBanner" />
+
+<!-- ══ KURUMSAL REFERANSLAR ═══════════════════════════════════════════════ -->
+@if (kurumsallar.Any())
+{
+    <section class="section-pad" style="background:#f8f9f4;">
+        <div class="container">
+            <div class="section-header text-center reveal">
+                <p class="section-eyebrow">Güvendikleri Markalar</p>
+                <h2 class="section-title">Kurumsal Referanslarımız</h2>
+                <div class="gold-line"></div>
+            </div>
+            <div class="row g-4 mt-4 justify-content-center">
+                @foreach (var k in kurumsallar)
+                {
+                    <div class="col-lg-4 col-md-6 reveal">
+                        <div class="card border-0 shadow-sm h-100 text-center p-4">
+                            <div class="card-body p-0">
+                                <h5 class="fw-bold mb-1" style="color:var(--dark); font-size:1.1rem">@k.FirmaAdi</h5>
+                                <small class="text-muted">@k.Unvan — @k.Sehir</small>
+                                <div class="my-2">
+                                    @for (int i = 0; i < k.Puan; i++) { <i class="bi bi-star-fill text-warning small"></i> }
+                                </div>
+                                <p class="text-muted mt-2 mb-0" style="font-size:.9rem; line-height:1.7">"@k.Yorum"</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+    <div style="height:2px; background:linear-gradient(to right, transparent, #e0e0e0, transparent);"></div>
+}
+
+<!-- ══ BİREYSEL REFERANSLAR ═══════════════════════════════════════════════ -->
+<section class="section-pad">
+    <div class="container">
+        @if (TempData["Basari"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show mb-5" role="alert">
+                <i class="bi bi-check-circle me-2"></i>@TempData["Basari"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+
+        <div class="section-header text-center reveal">
+            <p class="section-eyebrow">Müşterilerimiz Ne Diyor</p>
+            <h2 class="section-title">Referanslarımız</h2>
+            <div class="gold-line"></div>
+        </div>
+
+        <div class="row g-4 mt-4">
+            @foreach (var r in referanslar)
+            {
+                <div class="col-lg-4 col-md-6 reveal">
+                    <div class="referans-kart-static">
+                        <div class="ref-yildizlar mb-3">
+                            @for (int i = 0; i < r.Puan; i++) { <i class="bi bi-star-fill"></i> }
+                            @for (int i = r.Puan; i < 5; i++) { <i class="bi bi-star"></i> }
+                        </div>
+                        <p class="ref-yorum">"@r.Yorum"</p>
+                        <div class="ref-kisi mt-4">
+                            @if (!string.IsNullOrEmpty(r.FotoUrl))
+                            {
+                                <img src="@r.FotoUrl" alt="@r.AdSoyad" class="ref-foto" />
+                            }
+                            else
+                            {
+                                <div class="ref-foto-placeholder"><i class="bi bi-person"></i></div>
+                            }
+                            <div>
+                                <strong class="ref-isim">@r.AdSoyad</strong>
+                                @if (!string.IsNullOrEmpty(r.Unvan))
+                                {
+                                    <span class="ref-unvan">@r.Unvan</span>
+                                }
+                                <span class="ref-sehir">
+                                    @r.Sehir
+                                    @if (!string.IsNullOrEmpty(r.ProjeAdi)) { <span>— @r.ProjeAdi</span> }
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        @if (!referanslar.Any())
+        {
+            <div class="text-center py-5 text-muted">
+                <i class="bi bi-chat-quote fs-1 opacity-25 d-block mb-3"></i>
+                <p>Henüz bireysel referans bulunmuyor.</p>
+            </div>
+        }
+    </div>
+</section>
+
+<!-- ══ YORUM FORMU ════════════════════════════════════════════════════════ -->
+<section class="section-pad bg-light-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="section-header text-center reveal">
+                    <p class="section-eyebrow">Deneyiminizi Paylaşın</p>
+                    <h2 class="section-title">Yorum Bırakın</h2>
+                    <div class="gold-line"></div>
+                    <p class="mt-3 text-muted">Yorumunuz incelendikten sonra yayınlanacaktır.</p>
+                </div>
+
+                <form asp-action="Index" method="post" class="mt-5 needs-validation reveal" novalidate>
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label asp-for="AdSoyad" class="form-label">Ad Soyad *</label>
+                            <input asp-for="AdSoyad" class="form-control" placeholder="Adınız ve soyadınız" required />
+                            <span asp-validation-for="AdSoyad" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Sehir" class="form-label">Şehir</label>
+                            <input asp-for="Sehir" class="form-control" placeholder="İstanbul" />
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Unvan" class="form-label">Unvan / Meslek</label>
+                            <input asp-for="Unvan" class="form-control" placeholder="Ev Sahibi" />
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="ProjeAdi" class="form-label">Proje Adı</label>
+                            <input asp-for="ProjeAdi" class="form-control" placeholder="Bahçe Tasarımı" />
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Puan" class="form-label">Puan *</label>
+                            <select asp-for="Puan" class="form-select" required>
+                                <option value="5">★★★★★ — Mükemmel</option>
+                                <option value="4">★★★★☆ — Çok İyi</option>
+                                <option value="3">★★★☆☆ — İyi</option>
+                                <option value="2">★★☆☆☆ — Orta</option>
+                                <option value="1">★☆☆☆☆ — Zayıf</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="Yorum" class="form-label">Yorumunuz *</label>
+                            <div class="position-relative">
+                                <textarea asp-for="Yorum" class="form-control" rows="5"
+                                          placeholder="Deneyiminizi bizimle paylaşın..."
+                                          maxlength="1000" required></textarea>
+                                <small class="char-counter text-muted"></small>
+                            </div>
+                            <span asp-validation-for="Yorum" class="text-danger small"></span>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-gold px-5">
+                                Gönder
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

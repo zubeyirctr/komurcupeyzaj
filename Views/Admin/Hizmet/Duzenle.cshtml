@@ -1,0 +1,67 @@
+@using KomürcüPeyzaj.Models
+@model Hizmet
+@{
+    ViewData["Title"] = "Hizmet Düzenle";
+    Layout = "_AdminLayout";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h5 class="fw-bold mb-0">Hizmet Düzenle</h5>
+    <a href="/admin/hizmetler" class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-left me-1"></i>Geri</a>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body p-4">
+        <form asp-action="Duzenle" method="post">
+            <input asp-for="Id" type="hidden" />
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+            <div class="row g-3">
+                <div class="col-md-8">
+                    <label asp-for="Ad" class="form-label fw-medium"></label>
+                    <input asp-for="Ad" class="form-control" />
+                    <span asp-validation-for="Ad" class="text-danger small"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Sira" class="form-label fw-medium"></label>
+                    <input asp-for="Sira" class="form-control" type="number" />
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Ikon" class="form-label fw-medium"></label>
+                    <input asp-for="Ikon" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="BaslangicFiyati" class="form-label fw-medium"></label>
+                    <div class="input-group">
+                        <input asp-for="BaslangicFiyati" class="form-control" type="number" step="100" />
+                        <span class="input-group-text">₺</span>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <label asp-for="GorselUrl" class="form-label fw-medium"></label>
+                    <input asp-for="GorselUrl" class="form-control" />
+                </div>
+                <div class="col-12">
+                    <label asp-for="KisaAciklama" class="form-label fw-medium"></label>
+                    <input asp-for="KisaAciklama" class="form-control" />
+                </div>
+                <div class="col-12">
+                    <label asp-for="Aciklama" class="form-label fw-medium"></label>
+                    <textarea asp-for="Aciklama" class="form-control" rows="5"></textarea>
+                    <span asp-validation-for="Aciklama" class="text-danger small"></span>
+                </div>
+                <div class="col-12">
+                    <div class="form-check">
+                        <input asp-for="AktifMi" class="form-check-input" type="checkbox" />
+                        <label asp-for="AktifMi" class="form-check-label">Aktif</label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary px-5">Güncelle</button>
+                    <a href="/admin/hizmetler" class="btn btn-outline-secondary ms-2">İptal</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

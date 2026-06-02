@@ -1,0 +1,147 @@
+@using KomürcüPeyzaj.Models
+@model IletisimMesaji
+@{
+    ViewData["Title"] = "İletişim";
+    ViewData["BannerBaslik"] = "İletişim";
+    ViewData["BannerAlt"] = "Ücretsiz danışmanlık ve teklif için bize ulaşın";
+    var ayarlar = ViewBag.Ayarlar as SiteAyarlari ?? new SiteAyarlari();
+}
+
+<partial name="_PageBanner" />
+
+<section class="section-pad">
+    <div class="container">
+        <div class="row g-5">
+
+            <!-- Form -->
+            <div class="col-lg-7 reveal">
+                <p class="section-eyebrow">Bize Yazın</p>
+                <h2 class="section-title">Mesaj Gönderin</h2>
+                <div class="gold-line mb-5"></div>
+
+                @if (TempData["AboneBasari"] != null)
+                {
+                    <div class="alert alert-success mb-4"><i class="bi bi-check-circle me-2"></i>@TempData["AboneBasari"]</div>
+                }
+
+                <form asp-action="Index" method="post" class="needs-validation" novalidate>
+                    @Html.AntiForgeryToken()
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label asp-for="AdSoyad" class="form-label">Ad Soyad *</label>
+                            <input asp-for="AdSoyad" class="form-control" placeholder="Adınız ve soyadınız" required />
+                            <span asp-validation-for="AdSoyad" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Email" class="form-label">E-posta *</label>
+                            <input asp-for="Email" class="form-control" type="email" placeholder="ornek@mail.com" required />
+                            <span asp-validation-for="Email" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Telefon" class="form-label">Telefon</label>
+                            <input asp-for="Telefon" class="form-control" placeholder="0555 000 00 00" />
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Konu" class="form-label">Konu</label>
+                            <select asp-for="Konu" class="form-select">
+                                <option value="">Konu seçin...</option>
+                                <option>Bahçe Tasarımı</option>
+                                <option>Rulo Çim</option>
+                                <option>Sulama Sistemi</option>
+                                <option>Bakım Hizmeti</option>
+                                <option>Fiyat Bilgisi</option>
+                                <option>Diğer</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="Mesaj" class="form-label">Mesaj *</label>
+                            <div class="position-relative">
+                                <textarea asp-for="Mesaj" class="form-control" rows="6"
+                                          maxlength="1000"
+                                          placeholder="Projeniz hakkında bilgi verin..."
+                                          required></textarea>
+                                <small class="char-counter text-muted"></small>
+                            </div>
+                            <span asp-validation-for="Mesaj" class="text-danger small"></span>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-gold px-5">
+                                Gönder
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Bilgi -->
+            <div class="col-lg-5 reveal">
+                <div class="iletisim-bilgi-wrap">
+                    <p class="section-eyebrow">Ulaşın</p>
+                    <h2 class="section-title">İletişim Bilgileri</h2>
+                    <div class="gold-line mb-4"></div>
+
+                    <ul class="iletisim-list">
+                        <li>
+                            <div class="iletisim-ikon"><i class="bi bi-telephone"></i></div>
+                            <div>
+                                <small>Telefon</small>
+                                <a href="tel:@(ayarlar.Telefon ?? "+905001234567")">@(ayarlar.Telefon ?? "+90 500 123 45 67")</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="iletisim-ikon"><i class="bi bi-envelope"></i></div>
+                            <div>
+                                <small>E-posta</small>
+                                <a href="mailto:@(ayarlar.Email ?? "info@komürcüpeyzaj.com")">@(ayarlar.Email ?? "info@komürcüpeyzaj.com")</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="iletisim-ikon"><i class="bi bi-geo-alt"></i></div>
+                            <div>
+                                <small>Adres</small>
+                                <span>@(ayarlar.Adres ?? "Türkiye")</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="iletisim-ikon"><i class="bi bi-clock"></i></div>
+                            <div>
+                                <small>Çalışma Saatleri</small>
+                                <span>Pazartesi — Cumartesi: 08:00 – 18:00</span>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="mt-4">
+                        <p class="small text-muted mb-2">Sosyal medyada takip edin</p>
+                        <div class="d-flex gap-2">
+                            <a href="@(ayarlar.Instagram ?? "#")" class="sosyal-ikon" target="_blank"><i class="bi bi-instagram"></i></a>
+                            <a href="@(ayarlar.Facebook ?? "#")" class="sosyal-ikon" target="_blank"><i class="bi bi-facebook"></i></a>
+                            <a href="@(ayarlar.WhatsApp ?? "#")" class="sosyal-ikon" style="background:#25D366;" target="_blank"><i class="bi bi-whatsapp"></i></a>
+                        </div>
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(ayarlar.GoogleMapsEmbed))
+                    {
+                        <div class="mt-5 overflow-hidden" style="height:240px">
+                            @Html.Raw(ayarlar.GoogleMapsEmbed)
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="mt-5 bg-light d-flex align-items-center justify-content-center" style="height:200px; border:1px solid #eee">
+                            <div class="text-center text-muted">
+                                <i class="bi bi-map fs-1 opacity-25"></i>
+                                <p class="small mt-2">Harita yakında eklenecek</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

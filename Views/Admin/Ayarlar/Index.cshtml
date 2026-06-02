@@ -1,0 +1,79 @@
+@using KomürcüPeyzaj.Models
+@model SiteAyarlari
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Site Ayarları";
+}
+
+<div class="card shadow-sm" style="max-width:760px">
+    <div class="card-body p-4">
+        <form asp-action="Ayarlar" method="post">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+            <h6 class="fw-bold mb-3 border-bottom pb-2">İletişim Bilgileri</h6>
+            <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                    <label asp-for="Telefon" class="form-label">Telefon</label>
+                    <input asp-for="Telefon" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Email" class="form-label">E-posta</label>
+                    <input asp-for="Email" class="form-control" />
+                </div>
+                <div class="col-12">
+                    <label asp-for="Adres" class="form-label">Adres</label>
+                    <input asp-for="Adres" class="form-control" />
+                </div>
+            </div>
+
+            <h6 class="fw-bold mb-3 border-bottom pb-2">Sosyal Medya</h6>
+            <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                    <label asp-for="Instagram" class="form-label">Instagram URL</label>
+                    <input asp-for="Instagram" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Facebook" class="form-label">Facebook URL</label>
+                    <input asp-for="Facebook" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="WhatsApp" class="form-label">WhatsApp (wa.me/...)</label>
+                    <input asp-for="WhatsApp" class="form-control" placeholder="https://wa.me/905300967091" />
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="TikTok" class="form-label">TikTok URL</label>
+                    <input asp-for="TikTok" class="form-control" placeholder="https://tiktok.com/&commat;kullanici" />
+                </div>
+            </div>
+
+            <h6 class="fw-bold mb-3 border-bottom pb-2">Sayfa İçerikleri</h6>
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <label asp-for="TamamlananProje" class="form-label">Tamamlanan Proje</label>
+                    <input asp-for="TamamlananProje" class="form-control" type="number" />
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="MutluMusteri" class="form-label">Mutlu Müşteri</label>
+                    <input asp-for="MutluMusteri" class="form-control" type="number" />
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="DeneyimYili" class="form-label">Deneyim Yılı</label>
+                    <input asp-for="DeneyimYili" class="form-control" type="number" />
+                </div>
+                <div class="col-12">
+                    <label asp-for="HakkimizdaMetni" class="form-label">Hakkımızda Metni</label>
+                    <textarea asp-for="HakkimizdaMetni" class="form-control" rows="4"></textarea>
+                </div>
+                <div class="col-12">
+                    <label asp-for="GoogleMapsEmbed" class="form-label">Google Maps Embed Kodu</label>
+                    <textarea asp-for="GoogleMapsEmbed" class="form-control" rows="3" placeholder='&lt;iframe src="..."&gt;&lt;/iframe&gt;'></textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-gold">Kaydet</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

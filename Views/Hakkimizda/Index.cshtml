@@ -1,0 +1,152 @@
+@using KomürcüPeyzaj.Models
+@{
+    ViewData["Title"] = "Hakkımızda";
+    ViewData["BannerBaslik"] = "Hakkımızda";
+    ViewData["BannerAlt"] = "Kömürcü Peyzaj'ı Tanıyın";
+    var ayarlar = ViewBag.Ayarlar as SiteAyarlari ?? new SiteAyarlari();
+    var ekip    = ViewBag.Ekip as List<EkipUyesi> ?? new();
+}
+
+<partial name="_PageBanner" />
+
+<!-- ══ HİKAYEMİZ ═════════════════════════════════════════════════════════ -->
+<section class="section-pad">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 reveal">
+                <p class="section-eyebrow">Hikayemiz</p>
+                <h2 class="section-title">Doğaya Olan Tutkumuz</h2>
+                <div class="gold-line"></div>
+                <p class="mt-4 text-muted" style="line-height:1.9">
+                    @(ayarlar.HakkimizdaMetni ?? "1998 yılından bu yana Kömürcü Peyzaj olarak Türkiye'nin dört bir yanında yüzlerce bahçe projesine imza attık. Her projede doğanın dilini konuşarak, yaşam alanlarını yeşile büründürüyoruz.")
+                </p>
+                <p class="text-muted mt-3" style="line-height:1.9">
+                    Müşterilerimizin hayallerini dinleyerek, mekânın doğal özelliklerini ve çevresel faktörleri göz önünde bulundurarak tamamen özgün tasarımlar ortaya koyuyoruz. Çevre dostu malzemeler ve organik yöntemlerle sürdürülebilir bahçeler inşa ediyoruz.
+                </p>
+                <div class="d-flex gap-3 mt-4">
+                    <a asp-controller="Proje" asp-action="Index" class="btn btn-gold">Projelerimiz</a>
+                    <a asp-controller="Iletisim" asp-action="Index" class="btn btn-outline-dark">İletişim</a>
+                </div>
+            </div>
+            <div class="col-lg-6 reveal">
+                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80"
+                     alt="Kömürcü Peyzaj Ekibi"
+                     class="img-fluid w-100"
+                     style="max-height:520px; object-fit:cover" />
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ İSTATİSTİKLER ═════════════════════════════════════════════════════ -->
+<section class="stats-section">
+    <div class="container">
+        <div class="row g-4 text-center">
+            <div class="col-md-3 col-6">
+                <div class="stat-item reveal">
+                    <span class="stat-num" data-target="@ayarlar.TamamlananProje" data-suffix="+">0</span>
+                    <p class="stat-label">Tamamlanan Proje</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stat-item reveal">
+                    <span class="stat-num" data-target="@ayarlar.MutluMusteri" data-suffix="+">0</span>
+                    <p class="stat-label">Mutlu Müşteri</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stat-item reveal">
+                    <span class="stat-num" data-target="@ayarlar.DeneyimYili" data-suffix="+">0</span>
+                    <p class="stat-label">Yıl Deneyim</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stat-item reveal">
+                    <span class="stat-num" data-target="12" data-suffix="">0</span>
+                    <p class="stat-label">İl'de Hizmet</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ DEĞERLERİMİZ ══════════════════════════════════════════════════════ -->
+<section class="section-pad bg-light-section">
+    <div class="container">
+        <div class="section-header text-center reveal">
+            <p class="section-eyebrow">Bizi Biz Yapan</p>
+            <h2 class="section-title">Değerlerimiz</h2>
+            <div class="gold-line"></div>
+        </div>
+        <div class="row g-4 mt-4">
+            <div class="col-md-3 col-sm-6 reveal">
+                <div class="neden-kart text-center">
+                    <div class="neden-ikon mx-auto"><i class="bi bi-heart"></i></div>
+                    <h5 class="mt-3">Tutku</h5>
+                    <p>Her projede doğaya olan sevgimizi yansıtıyoruz.</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 reveal">
+                <div class="neden-kart text-center">
+                    <div class="neden-ikon mx-auto"><i class="bi bi-gem"></i></div>
+                    <h5 class="mt-3">Kalite</h5>
+                    <p>En yüksek standartlarda malzeme ve titiz uygulama.</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 reveal">
+                <div class="neden-kart text-center">
+                    <div class="neden-ikon mx-auto"><i class="bi bi-shield-check"></i></div>
+                    <h5 class="mt-3">Güven</h5>
+                    <p>Sözümüzü tutuyoruz, zamanında ve eksiksiz teslim ediyoruz.</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 reveal">
+                <div class="neden-kart text-center">
+                    <div class="neden-ikon mx-auto"><i class="bi bi-recycle"></i></div>
+                    <h5 class="mt-3">Sürdürülebilirlik</h5>
+                    <p>Çevreye saygılı, organik ve doğa dostu çözümler.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ EKİBİMİZ ══════════════════════════════════════════════════════════ -->
+@if (ekip.Any())
+{
+    <section class="section-pad">
+        <div class="container">
+            <div class="section-header text-center reveal">
+                <p class="section-eyebrow">Uzman Kadro</p>
+                <h2 class="section-title">Ekibimiz</h2>
+                <div class="gold-line"></div>
+            </div>
+            <div class="row g-4 mt-4 justify-content-center">
+                @foreach (var e in ekip)
+                {
+                    <div class="col-lg-4 col-md-6 reveal">
+                        <div class="ekip-kart text-center">
+                            <div class="ekip-foto-wrap">
+                                <img src="@e.FotoUrl" alt="@e.AdSoyad" class="ekip-foto" />
+                            </div>
+                            <h4 class="ekip-isim mt-4">@e.AdSoyad</h4>
+                            <span class="ekip-unvan">@e.Unvan</span>
+                            <p class="ekip-bio mt-3">@e.Biyografi</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+<!-- ══ CTA ════════════════════════════════════════════════════════════════ -->
+<section class="cta-banner">
+    <div class="cta-overlay"></div>
+    <div class="container text-center text-white cta-content">
+        <p class="section-eyebrow" style="color:var(--gold)">Birlikte Çalışalım</p>
+        <h2 class="section-title text-white">Projenizi Planlamaya Başlayın</h2>
+        <p class="mt-3 mb-4 opacity-75">Ücretsiz keşif randevusu için iletişime geçin.</p>
+        <a asp-controller="Iletisim" asp-action="Index" class="btn btn-gold btn-lg">Teklif Al</a>
+    </div>
+</section>

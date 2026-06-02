@@ -1,0 +1,45 @@
+@using KomürcüPeyzaj.Models
+@model List<EkipUyesi>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Ekip";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h5 class="mb-0 fw-bold">Ekip Üyeleri</h5>
+</div>
+
+<div class="card shadow-sm">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Ad Soyad</th>
+                    <th>Unvan</th>
+                    <th>Sıra</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var e in Model)
+                {
+                    <tr>
+                        <td>
+                            @if (!string.IsNullOrEmpty(e.FotoUrl))
+                            {
+                                <img src="@e.FotoUrl" alt="@e.AdSoyad"
+                                     style="width:36px;height:36px;border-radius:50%;object-fit:cover;margin-right:10px" />
+                            }
+                            @e.AdSoyad
+                        </td>
+                        <td>@e.Unvan</td>
+                        <td>@e.Sira</td>
+                    </tr>
+                }
+                @if (!Model.Any())
+                {
+                    <tr><td colspan="3" class="text-center text-muted py-4">Ekip üyesi yok.</td></tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

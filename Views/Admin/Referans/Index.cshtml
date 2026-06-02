@@ -1,0 +1,73 @@
+@using KomürcüPeyzaj.Models
+@model List<Referans>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Referanslar";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h5 class="mb-0 fw-bold">Referanslar</h5>
+</div>
+
+<div class="card shadow-sm">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Ad Soyad</th>
+                    <th>Şehir</th>
+                    <th>Puan</th>
+                    <th>Tarih</th>
+                    <th>Durum</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var r in Model)
+                {
+                    <tr>
+                        <td>
+                            <strong>@r.AdSoyad</strong>
+                            @if (!string.IsNullOrEmpty(r.ProjeAdi)) { <br /><small class="text-muted">@r.ProjeAdi</small> }
+                        </td>
+                        <td>@r.Sehir</td>
+                        <td>
+                            @for (int i = 0; i < r.Puan; i++) { <i class="bi bi-star-fill text-warning"></i> }
+                        </td>
+                        <td class="text-muted small">@r.Tarih.ToString("dd MMM yyyy")</td>
+                        <td>
+                            @if (r.YayindaMi)
+                            {
+                                <span class="badge bg-success">Yayında</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-warning text-dark">Onay Bekliyor</span>
+                            }
+                        </td>
+                        <td>
+                            <div class="d-flex gap-2">
+                                @if (!r.YayindaMi)
+                                {
+                                    <form asp-action="ReferansOnayla" asp-route-id="@r.Id" method="post" class="d-inline">
+                                        @Html.AntiForgeryToken()
+                                        <button class="btn btn-sm btn-success">Onayla</button>
+                                    </form>
+                                }
+                                <form asp-action="ReferansSil" asp-route-id="@r.Id" method="post" class="d-inline"
+                                      onsubmit="return confirm('Bu referansı silmek istediğinizden emin misiniz?')">
+                                    @Html.AntiForgeryToken()
+                                    <button class="btn btn-sm btn-outline-danger">Sil</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                @if (!Model.Any())
+                {
+                    <tr><td colspan="6" class="text-center text-muted py-4">Henüz referans yok.</td></tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,102 @@
+@using KomürcüPeyzaj.Models
+@{
+    ViewData["Title"] = "Ürünler";
+    ViewData["BannerBaslik"] = "Ürünlerimiz";
+    ViewData["BannerAlt"] = "Bahçe ve peyzaj için kaliteli ürünler";
+    var urunler = ViewBag.Urunler as List<Urun> ?? new();
+    var kategoriler = urunler.Select(u => u.Kategori).Distinct().OrderBy(k => k).ToList();
+}
+
+<partial name="_PageBanner" />
+
+<!-- ══ FİLTRE & ÜRÜNLER ═══════════════════════════════════════════════════ -->
+<section class="section-pad">
+    <div class="container">
+
+        <!-- Kategori Filtresi -->
+        <div class="text-center mb-5 reveal">
+            <div class="btn-group flex-wrap gap-2" role="group">
+                <button class="btn btn-filtre active" data-kategori="tumu">Tümü</button>
+                @foreach (var kat in kategoriler)
+                {
+                    <button class="btn btn-filtre" data-kategori="@kat">@kat</button>
+                }
+            </div>
+        </div>
+
+        <!-- Ürün Grid -->
+        <div class="row g-4" id="urun-grid">
+            @foreach (var u in urunler)
+            {
+                <div class="col-lg-4 col-md-6 urun-kart-wrap reveal" data-kategori="@u.Kategori">
+                    <div class="urun-kart h-100 d-flex flex-column @(!u.StokVarMi ? "stok-yok" : "")">
+                        <div class="urun-kart-img" style="height:220px; overflow:hidden; flex-shrink:0;">
+                            <img src="@(string.IsNullOrEmpty(u.GorselUrl) ? "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600" : u.GorselUrl)"
+                                 alt="@u.Ad" loading="lazy"
+                                 style="width:100%; height:100%; object-fit:cover;" />
+                            @if (!u.StokVarMi)
+                            {
+                                <div class="stok-overlay">Tükendi</div>
+                            }
+                            <span class="urun-kategori-badge">@u.Kategori</span>
+                        </div>
+                        <div class="urun-kart-body d-flex flex-column flex-grow-1">
+                            <h3 class="urun-kart-title">@u.Ad</h3>
+                            <p class="urun-kart-desc flex-grow-1">@u.KisaAciklama</p>
+                            <div class="urun-kart-footer mt-auto">
+                                <span class="urun-fiyat">
+                                    @if (u.Fiyat > 0)
+                                    {
+                                        @u.Fiyat.ToString("N0") <small>₺</small>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted fs-6">Fiyat için arayın</span>
+                                    }
+                                </span>
+                                <a href="/urunler/@u.Id" class="btn btn-sm btn-outline-primary">İncele</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        @if (!urunler.Any())
+        {
+            <div class="text-center py-5 text-muted">
+                <i class="bi bi-box-seam fs-1 opacity-25 d-block mb-3"></i>
+                <p>Henüz ürün eklenmemiş.</p>
+            </div>
+        }
+    </div>
+</section>
+
+<!-- ══ CTA ════════════════════════════════════════════════════════════════ -->
+<section class="cta-banner">
+    <div class="cta-overlay"></div>
+    <div class="container text-center text-white cta-content">
+        <p class="section-eyebrow" style="color:var(--gold)">Sipariş & Bilgi</p>
+        <h2 class="section-title text-white">Ürünler Hakkında Bilgi Alın</h2>
+        <p class="mt-3 mb-4 opacity-75">Fiyat, stok veya sipariş için bize ulaşın.</p>
+        <a href="https://wa.me/905300967091" target="_blank" rel="noopener" class="btn btn-gold btn-lg me-3">
+            <i class="bi bi-whatsapp me-2"></i>WhatsApp
+        </a>
+        <a asp-controller="Iletisim" asp-action="Index" class="btn btn-outline-light btn-lg">İletişime Geç</a>
+    </div>
+</section>
+
+@section Scripts {
+<script>
+    document.querySelectorAll('.btn-filtre').forEach(btn => {
+        btn.addEventListener('click', function () {
+            document.querySelectorAll('.btn-filtre').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            const kat = this.dataset.kategori;
+            document.querySelectorAll('.urun-kart-wrap').forEach(kart => {
+                kart.style.display = (kat === 'tumu' || kart.dataset.kategori === kat) ? '' : 'none';
+            });
+        });
+    });
+</script>
+}
